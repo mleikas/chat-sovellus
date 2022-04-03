@@ -7,10 +7,6 @@ def index():
     listing = messages.get_list()
     return render_template("index.html",messages1=listing)
 
-@app.route("/new")
-def new():
-    return render_template("new.html")
-
 @app.route("/send", methods=["POST"])
 def send():
     content = request.form["content"]
