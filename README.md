@@ -12,3 +12,7 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi etsiä kaikki viestit, joiden osana on annettu sana.
 - Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
 - Ylläpitäjä voi luoda salaisen alueen ja määrittää, keillä käyttäjillä on pääsy alueelle.
+
+Voit testata sovellusta Herokussa: chat-sovellus-ml.herokuapp.com
+
+Sovellus on tällä hetkellä rikki, joten sitä ei voi käyttää. Täytyy käydä pajassa kyselemässä.

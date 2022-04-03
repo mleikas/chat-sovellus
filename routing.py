@@ -5,7 +5,7 @@ import messages, users
 @app.route("/")
 def index():
     listing = messages.get_list()
-    return render_template("index.html",messages=listing)
+    return render_template("index.html",messages1=listing)
 
 @app.route("/new")
 def new():
