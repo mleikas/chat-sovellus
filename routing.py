@@ -1,7 +1,15 @@
+from app import app
+from flask import render_template, request, redirect
+import messages, users
+
 @app.route("/")
 def index():
-    list = messages.get_list
+    list = messages.get_list()
     return render_template("index.html", count=len(list),messages=list)
+
+@app.route("/new")
+def new():
+    return render_template("new.html")
 
 @app.route("/send", methods=["POST"])
 def send():
@@ -22,7 +30,12 @@ def login():
             return redirect("/")
         else:
             return render_template("error.html", errormsg="Väärä tunnus tai salasana")
-        
+
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -32,7 +45,7 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return render_template("error.html", errormsg="Salasanat eroavat")
+            return render_template("error.html", errormsg="Salasanat eroavat toisistaan")
         if users.register(username, password1):
             return redirect("/")
         else:
