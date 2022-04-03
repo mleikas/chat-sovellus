@@ -2,6 +2,7 @@
 <h1>Etusivu</h1>
 <b>Tervetuloa</b>
 <hr>
+{% for message in messages %}
 <i>Viesti:</i> {{ message[0] }}
 <p>
 <i>Lähettäjä</i> {{ message[1] }}
@@ -9,7 +10,7 @@
 <i>Lähetetty:</i> {{ message[2].strftime("%Y-%m-%d %H:%M:%S") }}
 <hr>
 {% endfor %}
-{% if sessio.user_id %}
+{% if session.user_id %}
 Olet kirjautunut sisään.
 <a href="/new">Lähetä viesti</a> | <a href="/logout">Kirjaudu ulos</a>
 {% else %}
