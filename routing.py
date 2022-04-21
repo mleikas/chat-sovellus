@@ -14,7 +14,10 @@ def send():
         return redirect("/")
     else:
         return render_template("error.html", errormsg="Viestin lähetys ei toiminut")
-    
+
+@app.route("/new")
+return render_template("new.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
