@@ -3,6 +3,7 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     password TEXT
 );
+
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     content TEXT,
