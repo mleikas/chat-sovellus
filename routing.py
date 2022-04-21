@@ -16,7 +16,8 @@ def send():
         return render_template("error.html", errormsg="Viestin lähetys ei toiminut")
 
 @app.route("/new")
-return render_template("new.html")
+def new():
+    return render_template("new.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
