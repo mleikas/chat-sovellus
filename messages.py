@@ -15,3 +15,5 @@ def send(content):
     db.session.commit()
     return True
 
+def search(content):
+    pass
