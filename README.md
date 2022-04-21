@@ -15,5 +15,3 @@ Sovelluksen ominaisuuksia:
 
 Voit testata sovellusta Herokussa: chat-sovellus-ml.herokuapp.com
 
-Sovellus on tällä hetkellä kirjautumisen kanssa rikki, joten sitä ei voi käyttää.
-Täytyy käydä pajassa kyselemässä.
