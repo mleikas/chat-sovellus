@@ -7,7 +7,7 @@ def get_list():
     return result.fetchall()
 
 def send(content):
-    user_id = users.user_id
+    user_id = users.user_id()
     if user_id == 0:
         return False
     sql = "INSERT INTO info (content, user_id, sent_at) VALUES (:content, :user_id, NOW())"
