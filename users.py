@@ -20,7 +20,7 @@ def register(username, password):
     try:
         sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
         db.session.execute(sql, {"username":username, "password":hash_value})
-        db.session.commit
+        db.session.commit()
     except:
         return False
     return login(username, password)
