@@ -50,3 +50,11 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
+
+@app.route("/result", methods=["GET"])
+def result():
+    query = request.args["query"]
+    sql = "SELECT id, content FROM messages WHERE content LIKE :query"
+    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    messages = result.fetchall()
+    return render_templat("result.html", messages=messages)
