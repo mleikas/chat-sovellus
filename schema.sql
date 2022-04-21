@@ -4,7 +4,7 @@ CREATE TABLE users (
     password TEXT
 );
 
-CREATE TABLE messages (
+CREATE TABLE info (
     id SERIAL PRIMARY KEY,
     content TEXT,
     user_id INTEGER REFERENCES users,
