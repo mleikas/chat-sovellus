@@ -56,5 +56,5 @@ def result():
     query = request.args["query"]
     sql = "SELECT id, content FROM messages WHERE content LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
-    messages = result.fetchall()
-    return render_templat("result.html", messages=messages)
+    listing = result.fetchall()
+    return render_templat("result.html", messages1=listing)
