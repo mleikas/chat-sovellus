@@ -17,9 +17,10 @@ Lähettäjä: {{ message.username }} <br>
 {% endfor %}
 {% if session.user_id %}
 Olet kirjautunut sisään.
+<hr>
 <form action="/send" method="POST"> 
 <p>Lähetä uusi viesti</p>
-<textarea name=""content" rows="4" cols="60"></textarea>
+<textarea name="content" rows="4" cols="60"></textarea>
 <br>
 <input type="submit" value="Lähetä">
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
