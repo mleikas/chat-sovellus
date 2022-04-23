@@ -1,6 +1,5 @@
 <title>Alueet</title>
 <h1>Alueet</h1>
-<b>Tervetuloa</b>
 <hr>
 <h2>{{ area_name }}</h2>
 {% for thread in threads %}
@@ -9,7 +8,7 @@
 {% endfor %}
 {% if session.user_id %}
 Olet kirjautunut sisään.
-form action="/new_thread" method="POST">
+<form action="/new_thread" method="POST">
 <p>Uusi ketju:</p>
 <p>Aihe: <input type="text" name="thread_name" required maxlength="140"></p>
 <p>Viesti: <textarea name="content" rows="4" cols="60"></textarea></p>
