@@ -4,7 +4,7 @@
 <a href="/">Takaisin etusivulle</a>
 <hr>
 {% if session.user_id %}
-<h2>{{ header.thread_name</h2>
+<h2>{{ header.thread_name }}</h2>
 {% for message in messages %}
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>
