@@ -11,8 +11,9 @@ def index():
 @app.route("/send", methods=["POST"])
 def send():
     content = request.form["content"]
-    if messages.send(content):
-        return redirect("/")
+    thread_id = request.form["thread_id"]
+    if messages.send(content, thread_id):
+        return redirect("/thread/"+str(thread_id))
     else:
         return render_template("error.html", errormsg="Viestin lähetys ei toiminut")
 
