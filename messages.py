@@ -32,7 +32,7 @@ def send(content, thread_id):
     if user_id == 0:
         return False
     sql = "INSERT INTO info (content, user_id, sent_at, thread_id, visibility) VALUES (:content, :user_id, NOW(), :thread_id, True)"
-    db.session.execute(sql, {"content":content, "user_id":user_id})
+    db.session.execute(sql, {"content":content, "user_id":user_id, "thread_id":thread_id})
     db.session.commit()
     return True
 
