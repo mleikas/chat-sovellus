@@ -1,0 +1,22 @@
+<title>Etusivu</title>
+<h1>Etusivu</h1>
+<b>Tervetuloa</b>
+<hr>
+<h2>{{ area_name }}</h2>
+{% for area in areas %}
+<a href="/areas/{{ areas.id }}">{{ areas.area_name }}</a><br>
+<hr>
+{% endfor %}
+{% if session.user_id %}
+Olet kirjautunut sisään.
+form action="/new_thread" method="POST">
+<p>Uusi keskustelu:</p>
+<p>Aihe: <input type="text" name="thread_name" required maxlength="140"></p>
+<p>Viesti: <textarea name="content" rows="4" cols="60"</textarea></p>
+<input type="submit" value="Lähetä">
+<input type="hidden" name="area_id" value="{{ area_id }}">
+</form>
+
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %}

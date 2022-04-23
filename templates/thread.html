@@ -1,0 +1,23 @@
+<title>Ketjut</title>
+<h1>Ketjut</h1>
+<b>Tervetuloa</b>
+<hr>
+{% for message in messages %}
+Lähettäjä: {{ message.username }}
+{{ message.time.strftime("%Y-%m-%d %H:%M:%S") }}
+{% if session.user_id == message.user_id %}
+<form action="/delete" method="POST"><input type="submit" value="Poista viesti">
+<input type="hidden" name="msg_id" value="{{ info.id }}>
+<input type="hidden" name="user_id" value="{{ message.user_id }}">
+<input type="hidden" name="thread_id" value="{{ thread_id }}">
+</form>
+{% endif %}
+<hr>
+{% endfor %}
+{% if session.user_id %}
+Olet kirjautunut sisään.
+<a href="/new">Lähetä viesti</a> | <a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %}
+

@@ -2,12 +2,8 @@
 <h1>Etusivu</h1>
 <b>Tervetuloa</b>
 <hr>
-{% for message in messages1 %}
-<i>Viesti:</i> {{ message[0] }}
-<p>
-<i>Lähettäjä</i> {{ message[1] }}
-<p>
-<i>Lähetetty:</i> {{ message[2].strftime("%Y-%m-%d %H:%M:%S") }}
+{% for area in areas %}
+<a href="/areas/{{ areas.id }}">{{ areas.area_name }}</a>
 <hr>
 {% endfor %}
 {% if session.user_id %}

@@ -1,11 +1,12 @@
 from app import app
 from flask import render_template, request, redirect
 import messages, users
+from db import db
 
 @app.route("/")
 def index():
-    listing = messages.get_list()
-    return render_template("index.html",messages1=listing)
+    listing = messages.get_areas()
+    return render_template("index.html",areas=listing)
 
 @app.route("/send", methods=["POST"])
 def send():
@@ -18,6 +19,18 @@ def send():
 @app.route("/new")
 def new():
     return render_template("new.html")
+
+@app.route("/areas/<int:id>")
+def areas(areaid):
+    name = messages.get_area_name(id)
+    threads = message.get_threads(id)
+    return render_template("areas.html", threads=threads, area_name=name, area_id=areaid)
+
+@app.route("/thread/<int:id>")
+def thread(threadid):
+    messages1 = messages.get_messages(id)
+    header = messages.get_header(id)
+    return render_template("thread.html", messages=messages1, thread_id=threadid, header=header)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
