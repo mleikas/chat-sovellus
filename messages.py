@@ -40,6 +40,8 @@ def send(content, thread_id):
 
 def make_thread(thread_name, content, area_id):
     user_id = users.user_id()
+    if area_id == False:
+        return False
     if len(thread_name) > 140:
         return False
     sql = "INSERT INTO threads (thread_name, area_id, visibility) VALUES (:thread_name, :area, True)"
