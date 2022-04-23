@@ -1,10 +1,20 @@
 <title>Ketjut</title>
 <h1>Ketjut</h1>
-<b>Tervetuloa</b>
 <a href="/">Takaisin etusivulle</a>
 <hr>
 {% if session.user_id %}
+Olet kirjautunut sisään.
+<hr>
 <h2>{{ header.thread_name }}</h2>
+<hr>
+<form action="/send" method="POST"> 
+<p>Lähetä uusi viesti</p>
+<textarea name="content" rows="4" cols="60"></textarea>
+<br>
+<input type="submit" value="Lähetä">
+<input type="hidden" name="thread_id" value="{{ thread_id }}">
+</form>
+<hr>
 {% for message in messages %}
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>
@@ -16,18 +26,11 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="user_id" value="{{ message.user_id }}">
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 </form>
+<br>
 {% endif %}
 <hr>
 {% endfor %}
-Olet kirjautunut sisään.
-<hr>
-<form action="/send" method="POST"> 
-<p>Lähetä uusi viesti</p>
-<textarea name="content" rows="4" cols="60"></textarea>
-<br>
-<input type="submit" value="Lähetä">
-<input type="hidden" name="thread_id" value="{{ thread_id }}">
-</form>
+
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
