@@ -3,16 +3,16 @@
 <b>Tervetuloa</b>
 <hr>
 <h2>{{ area_name }}</h2>
-{% for area in areas %}
-<a href="/areas/{{ area.id }}">{{ area.area_name }}</a><br>
+{% for thread in threads %}
+<a href="/thread/{{ thread.id }}">{{ thread.thread_name }}</a><br>
 <hr>
 {% endfor %}
 {% if session.user_id %}
 Olet kirjautunut sisään.
 form action="/new_thread" method="POST">
-<p>Uusi keskustelu:</p>
+<p>Uusi ketju:</p>
 <p>Aihe: <input type="text" name="thread_name" required maxlength="140"></p>
-<p>Viesti: <textarea name="content" rows="4" cols="60"</textarea></p>
+<p>Viesti: <textarea name="content" rows="4" cols="60"></textarea></p>
 <input type="submit" value="Lähetä">
 <input type="hidden" name="area_id" value="{{ area_id }}">
 </form>
