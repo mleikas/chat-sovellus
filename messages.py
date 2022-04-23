@@ -57,7 +57,7 @@ def make_thread(thread_name, content, area_id):
     return True
 
 def delete(message_id):
-    sql = "UPDATE info SET visible=False WHERE id=:id"
+    sql = "UPDATE info SET visibility=False WHERE id=:id"
     result = db.session.execute(sql, {"id":message_id})
     db.session.commit()
     return result.rowcount
