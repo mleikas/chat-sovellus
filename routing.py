@@ -28,7 +28,7 @@ def areas(id):
 
 @app.route("/thread/<int:id>")
 def thread(id):
-    messages1 = messages.get_messages(id)
+    messages1 = messages.get_list(id)
     header = messages.get_header(id)
     return render_template("thread.html", messages=messages1, thread_id=id, header=header)
 
