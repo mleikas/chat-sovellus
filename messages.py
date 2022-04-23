@@ -12,12 +12,12 @@ def get_areas():
     return result.fetchall()
 
 def get_area_name(area_id):
-    sql = "SELECT area_id FROM areas WHERE id=:id"
+    sql = "SELECT area_name FROM areas WHERE id=:id"
     result = db.session.execute(sql, {"id": area_id})
     return result.fetchone()[0]
 
 def get_threads(area_id):
-    sql = "SELECT id, thread_name FROM threads WHERE area_id=:id and visible=True"
+    sql = "SELECT id, thread_name FROM threads WHERE area_id=:id and visibility=True"
     result = db.session.execute(sql, {"id":area_id})
     return result.fetchall()
 
