@@ -1,7 +1,9 @@
 <title>Ketjut</title>
 <h1>Ketjut</h1>
 <b>Tervetuloa</b>
+<a href="/">Takaisin etusivulle</a>
 <hr>
+{% if session.user_id %}
 {% for message in messages %}
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>
@@ -15,7 +17,6 @@ Lähettäjä: {{ message.username }} <br>
 {% endif %}
 <hr>
 {% endfor %}
-{% if session.user_id %}
 Olet kirjautunut sisään.
 <hr>
 <form action="/send" method="POST"> 
@@ -29,4 +30,5 @@ Olet kirjautunut sisään.
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+
 
