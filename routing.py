@@ -17,10 +17,6 @@ def send():
     else:
         return render_template("error.html", errormsg="Viestin lähetys ei toiminut")
 
-@app.route("/new")
-def new():
-    return render_template("new.html")
-
 @app.route("/areas/<int:id>")
 def areas(id):
     name = messages.get_area_name(id)
@@ -51,7 +47,7 @@ def delete():
     if session["user_id"] == user_id:
         delete_message = messages.delete(message_id)
     if delete_message == False:
-        return render_template("error.html", message="Viestin poistaminen epäonnistui")
+        return render_template("error.html", errormsg="Viestin poistaminen epäonnistui")
     return redirect("/thread/"+str(thread_id))
 
 @app.route("/login", methods=["GET", "POST"])
