@@ -36,11 +36,18 @@ def send(content, thread_id):
     return True
 
 def make_thread(thread_name, content, area_id):
-    if len(topic) > 140:
-        return False
     user_id = session.get("user_id", 0)
-    sql = "INSERT INTO threads (thread_name, area_id, visibility) \ VALUES (:topic, :area, True)"
-    db.session.execute(sql, {"content":content, "user_id":user_id, "thread_id":thread_id})
+    if len(thread_name) > 140:
+        return False
+    sql = "INSERT INTO threads (thread_name, area_id, visibility) VALUES (:thread_name, :area, True)"
+    db.session.execute(sql, {"thread_name":thread_name, "area":area_id})
+
+    sql = "SELECT MAX(id) FROM threads"
+    thread_id = db.session.execute(sql).fetchone()[0]
+    
+    sql = "INSERT INTO info (content, user_id, sent_at, thread_id, visibility VALUES (:content, :user_id, :sent_at, :thread_id, True)"
+    db.session.execute(sql, {"content":content, "user_id", "thread_id":thread_id})
+
     db.session.commit()
     return True
 
