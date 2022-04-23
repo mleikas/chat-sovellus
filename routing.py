@@ -22,14 +22,14 @@ def new():
 
 @app.route("/areas/<int:id>")
 def areas(areaid):
-    name = messages.get_area_name(id)
-    threads = message.get_threads(id)
+    name = messages.get_area_name(areaid)
+    threads = message.get_threads(areaid)
     return render_template("areas.html", threads=threads, area_name=name, area_id=areaid)
 
 @app.route("/thread/<int:id>")
 def thread(threadid):
-    messages1 = messages.get_messages(id)
-    header = messages.get_header(id)
+    messages1 = messages.get_messages(threadid)
+    header = messages.get_header(threadid)
     return render_template("thread.html", messages=messages1, thread_id=threadid, header=header)
 
 @app.route("/make_thread", methods=["POST"])
@@ -84,6 +84,9 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
+@app.route("/search", methods=["POST"])
+def search():
+    pass
 
 @app.route("/result", methods=["GET"])
 def result():
