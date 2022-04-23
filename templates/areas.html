@@ -4,7 +4,7 @@
 <hr>
 <h2>{{ area_name }}</h2>
 {% for area in areas %}
-<a href="/areas/{{ areas.id }}">{{ areas.area_name }}</a><br>
+<a href="/areas/{{ area.id }}">{{ area.area_name }}</a><br>
 <hr>
 {% endfor %}
 {% if session.user_id %}
