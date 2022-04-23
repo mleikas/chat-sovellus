@@ -29,6 +29,8 @@ def get_header(thread_id):
 
 def send(content, thread_id):
     user_id = users.user_id()
+    if thread_id == False:
+        return False
     if user_id == 0:
         return False
     sql = "INSERT INTO info (content, user_id, sent_at, thread_id, visibility) VALUES (:content, :user_id, NOW(), :thread_id, True)"
@@ -37,7 +39,7 @@ def send(content, thread_id):
     return True
 
 def make_thread(thread_name, content, area_id):
-    user_id = session.get("user_id", 0)
+    user_id = users.user_id()
     if len(thread_name) > 140:
         return False
     sql = "INSERT INTO threads (thread_name, area_id, visibility) VALUES (:thread_name, :area, True)"
@@ -59,4 +61,7 @@ def delete(message_id):
     return result.rowcount
 
 def search(content):
+    pass
+
+def get_newest_post():
     pass
