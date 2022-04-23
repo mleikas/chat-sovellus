@@ -35,7 +35,7 @@ def send(content, thread_id):
     db.session.commit()
     return True
 
-def make_thread(content, thread_name, area_id):
+def make_thread(thread_name, content, area_id):
     if len(topic) > 140:
         return False
     user_id = session.get("user_id", 0)

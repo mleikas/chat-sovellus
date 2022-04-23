@@ -32,6 +32,27 @@ def thread(threadid):
     header = messages.get_header(id)
     return render_template("thread.html", messages=messages1, thread_id=threadid, header=header)
 
+@app.route("/make_thread", methods=["POST"])
+def make_thread():
+    thread_name = request.form["thread_name"]
+    content = request.form["content"]
+    area_id = request.form["area_id"]
+    post_thread = messages.make_thread(thread_name, content, area_id)
+    if post_thread == False:
+        return render_template("error.html", errormsg="Tarkista syötteet")
+    return redirect("/areas/"+str(area_id))
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    message_id = request.form["msg_id"]
+    user_id = int(request.form{"user_id"})
+    thread_id = request.form["thread_id"]
+    if session["user_id"] == user_id:
+        delete_message = messages.delete(message_id)
+    if delete_message == False:
+        return render_template("error.html", message="Viestin poistaminen epäonnistui")
+    return redirect("/thread/"+str(thread_id))
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":

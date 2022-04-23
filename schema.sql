@@ -31,3 +31,6 @@ CREATE TABLE area_access (
     area_id INTEGER REFERENCES areas,
     visibility BOOLEAN
 );
+
+INSERT INTO areas (area_name, visibility) VALUES ('Alue1', TRUE);
+INSERT INTO areas (area_name, visibility) VALUES ('Alue2', TRUE);
