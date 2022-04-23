@@ -21,16 +21,16 @@ def new():
     return render_template("new.html")
 
 @app.route("/areas/<int:id>")
-def areas(areaid):
-    name = messages.get_area_name(areaid)
-    threads = message.get_threads(areaid)
-    return render_template("areas.html", threads=threads, area_name=name, area_id=areaid)
+def areas(id):
+    name = messages.get_area_name(id)
+    threads = message.get_threads(id)
+    return render_template("areas.html", threads=threads, area_name=name, area_id=id)
 
 @app.route("/thread/<int:id>")
-def thread(threadid):
-    messages1 = messages.get_messages(threadid)
-    header = messages.get_header(threadid)
-    return render_template("thread.html", messages=messages1, thread_id=threadid, header=header)
+def thread(id):
+    messages1 = messages.get_messages(id)
+    header = messages.get_header(id)
+    return render_template("thread.html", messages=messages1, thread_id=id, header=header)
 
 @app.route("/make_thread", methods=["POST"])
 def make_thread():
