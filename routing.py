@@ -23,7 +23,7 @@ def new():
 @app.route("/areas/<int:id>")
 def areas(id):
     name = messages.get_area_name(id)
-    threads = message.get_threads(id)
+    threads = messages.get_threads(id)
     return render_template("areas.html", threads=threads, area_name=name, area_id=id)
 
 @app.route("/thread/<int:id>")
@@ -91,7 +91,7 @@ def search():
 @app.route("/result", methods=["GET"])
 def result():
     query = request.args["query"]
-    sql = "SELECT id, content FROM messages WHERE content LIKE :query"
+    sql = "SELECT id, content FROM info WHERE content LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     listing = result.fetchall()
-    return render_templat("result.html", messages1=listing)
+    return render_template("result.html", messages1=listing)
