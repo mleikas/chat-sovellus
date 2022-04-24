@@ -19,7 +19,7 @@ Olet kirjautunut sisään.
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>
 {{ message.sent_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
-{% if session.user_id == message.users.id %}
+{% if session.user_id == message.users_id %}
 <form action="/delete" method="POST">
 <input type="submit" value="Poista viesti">
 <input type="hidden" name="message_id" value="{{ message.id }}">

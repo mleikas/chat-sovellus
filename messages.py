@@ -3,7 +3,7 @@ from flask import session
 import users
 
 def get_list(thread_id):
-    sql = "SELECT I.id, I.content, U.username, U.id, I.sent_at FROM info I, users U WHERE I.user_id=U.id AND thread_id=:id AND I.visibility=True ORDER BY I.id DESC"
+    sql = "SELECT I.id, I.content, U.username, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.user_id=U.id AND thread_id=:id AND I.visibility=True ORDER BY I.id DESC"
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchall()
 
