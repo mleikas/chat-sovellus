@@ -1,6 +1,8 @@
 <title>Alueet</title>
 <h1>Alueet</h1>
-<a href="/">Takaisin etusivulle</a>
+<takaisin>
+    <a href="/">Takaisin etusivulle</a>
+</takaisin>
 <hr>
 <h2>{{ area_name }}</h2>
 {% for thread in threads %}
@@ -20,3 +22,11 @@ Olet kirjautunut sisään.
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+<style>
+    h1 {
+        background-color: skyblue
+    }
+    takaisin {
+        font-size: 14px;
+    }
+</style>

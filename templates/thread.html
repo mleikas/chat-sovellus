@@ -1,6 +1,8 @@
 <title>Ketjut</title>
 <h1>Ketjut</h1>
+<takaisin>
 <a href="/">Takaisin etusivulle</a>
+</takaisin>
 <hr>
 {% if session.user_id %}
 Olet kirjautunut sisään.
@@ -26,14 +28,18 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="user_id" value="{{ message.users_id }}">
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 </form>
-<br>
 {% endif %}
 <hr>
 {% endfor %}
-
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
-
-
+<style>
+    h1 {
+        background-color: skyblue
+    }
+    takaisin {
+        font-size: 14px;
+    }
+</style>

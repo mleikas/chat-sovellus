@@ -84,7 +84,7 @@ def register():
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
 @app.route("/search", methods=["POST"])
 def search():
-    pass
+    return render_template("search.html")
 
 @app.route("/result", methods=["GET"])
 def result():
