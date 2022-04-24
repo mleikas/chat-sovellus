@@ -42,7 +42,7 @@ def make_thread():
 @app.route("/delete", methods=["POST"])
 def delete():
     message_id = request.form["message_id"]
-    user_id = int(request.form["user_id"])
+    user_id = request.form["user_id"]
     thread_id = request.form["thread_id"]
     if session["user_id"] == user_id:
         delete_message = messages.delete(message_id)
