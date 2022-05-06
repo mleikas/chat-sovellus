@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, session, request, redirect, abort
 import messages, users
 from db import db
 
@@ -10,6 +10,8 @@ def index():
 
 @app.route("/send", methods=["POST"])
 def send():
+    if request.form["csrf_token"] != (session["csrf_token"]):
+        abort(403)
     content = request.form["content"]
     thread_id = request.form["thread_id"]
     if messages.send(content, thread_id):
@@ -31,6 +33,8 @@ def thread(id):
 
 @app.route("/make_thread", methods=["POST"])
 def make_thread():
+    if request.form["csrf_token"] != (session["csrf_token"]):
+        abort(403)
     thread_name = request.form["thread_name"]
     content = request.form["content"]
     area_id = request.form["area_id"]
@@ -41,6 +45,8 @@ def make_thread():
 
 @app.route("/delete", methods=["POST"])
 def delete():
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
     message_id = request.form["message_id"]
     user_id = int(request.form["user_id"])
     thread_id = request.form["thread_id"]
@@ -50,6 +56,18 @@ def delete():
     if delete_message == False:
         return render_template("error.html", errormsg="Viestin poistaminen epäonnistui")
     return redirect("/thread/"+str(thread_id))
+
+@app.route("/delete_threads", methods=["POST"])
+def delete_threads():
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
+    area_id = request.form["area_id"]
+    thread_id = request.form["thread_id"]
+
+    if user.admin() == True:
+        messages.delete_threads(thread_id)
+    
+    return redirect("/areas/"+str(area_id))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -82,6 +100,7 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
+
 @app.route("/search", methods=["POST"])
 def search():
     return render_template("search.html")

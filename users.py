@@ -31,3 +31,11 @@ def user_id():
 def logout():
     del session["user_id"]
 
+def admin():
+    admin_id = session.get("user_id", 0)
+    sql = "SELECT user_id FROM admin WHERE user_id=:user_id"
+    result = db.sessoin.execute(sql, {"user_id": user_id})
+    if result.fetchone():
+        return True
+    else:
+        return False

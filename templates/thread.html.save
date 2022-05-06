@@ -2,21 +2,13 @@
 <h1>Etusivu</h1>
 <b>Tervetuloa</b>
 <hr>
-<a href="/search">Etsi viestejä</a>
 {% for area in areas %}
-<a href="/areas/{{ area.id }}">{{ area.area_name }}</a>
+<a href="/areas/{{ areas.id }}">{{ areas.area_name }}</a>
 <hr>
 {% endfor %}
 {% if session.user_id %}
 Olet kirjautunut sisään.
-<a href="/logout">Kirjaudu ulos</a>
+<a href="/new">Lä
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
-
-<style>
-    h1 {
-        background-color: skyblue
-    }
-
-</style>

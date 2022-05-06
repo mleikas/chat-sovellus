@@ -30,11 +30,18 @@ CREATE TABLE info (
     user_id INTEGER REFERENCES users,
     sent_at TIMESTAMP,
     thread_id INTEGER REFERENCES threads,
+    thread_message BOOLEAN,
     visibility BOOLEAN
 );
 
 CREATE TABLE area_access (
     area_id INTEGER REFERENCES areas,
+    visibility BOOLEAN
+);
+
+CREATE TABLE admins (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
     visibility BOOLEAN
 );
 
