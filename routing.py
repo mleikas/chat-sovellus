@@ -101,7 +101,7 @@ def register():
         else:
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
 
-@app.route("/search", methods=["POST"])
+@app.route("/search")
 def search():
     return render_template("search.html")
 
