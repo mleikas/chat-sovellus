@@ -39,11 +39,11 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <hr>
-{% endfor %}
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+{% endfor %}
 <style>
     h1 {
         background-color: skyblue
