@@ -108,7 +108,7 @@ def search():
 @app.route("/result", methods=["GET"])
 def result():
     query = request.args["query"]
-    sql = "SELECT I.id, I.content, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query"
+    sql = "SELECT I.id, I.content, U.username, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     listing = result.fetchall()
     return render_template("result.html", messages1=listing)

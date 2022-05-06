@@ -1,6 +1,9 @@
 <title>Hakutulokset</title>
 <h1>Hakutulokset</h1>
 <a href="/">Takaisin etusivulle</a>
+<hr>
+{% if session.user_id %}
+Olet kirjautunut sisään.
 {% for message in messages1 %}
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>
@@ -13,7 +16,8 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
+{% endfor %}
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
-{% endfor %}
