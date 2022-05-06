@@ -31,7 +31,7 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}
-{if admin and message.thread_message %}
+{% if admin and message.thread_message %}
 <form action="/delete_thread" method="POST">
 <input type="submit" value="Poista ketju">
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
