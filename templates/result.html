@@ -12,6 +12,7 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endfor %}
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
