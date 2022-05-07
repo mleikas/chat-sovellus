@@ -130,7 +130,7 @@ def register():
 @app.route("/create_admin", methods=["GET", "POST"])
 def create_admin():
     if request.method == "GET":
-        return render_template("admin.html")
+        return render_template("register.html")
     if request.method == "POST":
         username = request.form["username"]
         password1 = request.form["password1"]
@@ -149,5 +149,5 @@ def search():
 @app.route("/result", methods=["GET"])
 def result():
     query = request.args["query"]
-    listing = get_search_result(query)
+    listing = messages.get_search_result(query)
     return render_template("result.html", messages1=listing)
