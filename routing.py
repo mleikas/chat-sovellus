@@ -130,7 +130,7 @@ def register():
 @app.route("/create_admin", methods=["GET", "POST"])
 def create_admin():
     if request.method == "GET":
-        return render_template("register.html")
+        return render_template("admin.html")
     if request.method == "POST":
         username = request.form["username"]
         password1 = request.form["password1"]
