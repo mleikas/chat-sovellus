@@ -97,7 +97,7 @@ def edit_message(message_id, new_content):
         return False
     sql = "UPDATE info SET content=:content WHERE id=:id"
     db.session.execute(sql, {"content":new_content, "id":message_id})
-    db.session.commit
+    db.session.commit()
     return True
 
 def edit_thread(thread_id, new_name):
@@ -107,7 +107,7 @@ def edit_thread(thread_id, new_name):
         return False
     sql = "UPDATE threads SET thread_name=:thread_name WHERE id=:id"
     db.session.execute(sql, {"thread_name":new_name, "id":thread_id})
-    db.session.commit
+    db.session.commit()
     return True
 
 def get_newest_post():

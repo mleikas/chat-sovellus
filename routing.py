@@ -101,6 +101,7 @@ def edit_message():
     message_id = request.form["message_id"]
     user_id = int(request.form["user_id"])
     new_name = request.form["new_content"]
+    thread_id = request.form["thread_id"]
     if session["user_id"] == user_id or users.admin():
         messages.edit_message(message_id,new_name)
     return redirect("/thread/"+str(thread_id))
