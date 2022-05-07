@@ -93,3 +93,8 @@ def get_newest_post():
     sql = "SELECT I.id, I.time, U.username FROM info I, users U WHERE I.thread_id=:thread_id AND U.id=I.user_id ORDER BY I.id DESC LIMIT 1"
     result = db.session.execute(sql, {"thread_id":thread_id})
     return result.fetchone()
+
+def get_search_result(query):
+    sql = "SELECT I.id, I.content, U.username, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query AND I.user_id=U.id"
+    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    return result.fetchall()
