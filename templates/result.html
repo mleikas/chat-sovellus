@@ -4,6 +4,7 @@
 <hr>
 {% if session.user_id %}
 Olet kirjautunut sisään.
+<hr>
 {% for message in messages1 %}
 Lähettäjä: {{ message.username }} <br>
 {{ message.content }} <br>

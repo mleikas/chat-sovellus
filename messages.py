@@ -69,5 +69,27 @@ def delete_threads(thread_id):
     db.session-execute(sql, {"id":thread_id})
     db.session.commit()
 
+def make_area(name):
+    if name == False:
+        return False
+    sql = "INSERT INTO areas (area_name, visibility) VALUES (:name, TRUE);"
+    area_id = db.sessoin.execute(sql, {"name":name}).fetchone()[0]
+
+    sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, True)"
+    db.session.execute(sql, {"area_id":area_id})
+    db.session.commit()
+    return True
+
+def delete_area(area_id, thread_id):
+    sql = "UPDATE areas SET visibility=False WHERE id=:id"
+    db.session.execute(sql, {"id":area_id})
+    sql = "UPDATE threads SET visibility=False WHERE id=:id"
+    db.session.execute(sql, {"id":thread_id})
+    sql = "UPDATE info SET visibility=False WHERE thread=:id"
+    db.session-execute(sql, {"id":thread_id})
+    db.session.commit()
+
 def get_newest_post():
-    pass
+    sql = "SELECT I.id, I.time, U.username FROM info I, users U WHERE I.thread_id=:thread_id AND U.id=I.user_id ORDER BY I.id DESC LIMIT 1"
+    result = db.session.execute(sql, {"thread_id":thread_id})
+    return result.fetchone()

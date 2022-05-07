@@ -8,6 +8,7 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
     password TEXT,
+    admin BOOLEAN,
     visibility BOOLEAN
 );
 
@@ -35,15 +36,11 @@ CREATE TABLE info (
 );
 
 CREATE TABLE area_access (
+    id SERIAL PRIMARY KEY,
     area_id INTEGER REFERENCES areas,
     visibility BOOLEAN
 );
 
-CREATE TABLE admins (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    visibility BOOLEAN
-);
 
 INSERT INTO areas (area_name, visibility) VALUES ('Alue1', TRUE);
 INSERT INTO areas (area_name, visibility) VALUES ('Alue2', TRUE);

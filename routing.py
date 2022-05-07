@@ -25,11 +25,24 @@ def areas(id):
     threads = messages.get_threads(id)
     return render_template("areas.html", threads=threads, area_name=name, area_id=id)
 
+@app.route("/make_area", methods=["POST"])
+def make_area():
+    if not users.admin():
+        return render_template("error.html", errormsg="Ei oikeuksia")
+    if request.form["csrf_token"] != (session["csrf_token"]):
+        abort(403)
+    area_name = request.form["area_name"]
+    post_area = messages.new_area(area_name)
+    if post_area == False:
+        return render_template("error.html", errormsg="Tarkista syötteet")
+    return redirect("/")
+
 @app.route("/thread/<int:id>")
 def thread(id):
     messages1 = messages.get_list(id)
     header = messages.get_header(id)
-    return render_template("thread.html", messages=messages1, thread_id=id, header=header)
+    admin = users.admin()
+    return render_template("thread.html", messages=messages1, thread_id=id, header=header, admin=admin)
 
 @app.route("/make_thread", methods=["POST"])
 def make_thread():
@@ -67,7 +80,20 @@ def delete_threads():
     if user.admin() == True:
         messages.delete_threads(thread_id)
     
-    return redirect("/areas/"+str(area_id))
+    return redirect("/")
+
+@app.route("/delete_areas", methods=["POST"])
+def delete_areas():
+    if not users.admin():
+        return render_template("error.html", errormsg="Ei oikeuksia")
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
+    area_id = request.form["area_id"]
+
+    if user.admin() == True:
+        messages.delete_threads(thread_id)
+    
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -101,6 +127,21 @@ def register():
         else:
             return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
 
+@app.route("/create_admin", methods=["GET", "POST"])
+def create_admin():
+    if request.method == "GET":
+        return render_template("admin.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password1 = request.form["password1"]
+        password2 = request.form["password2"]
+        if password1 != password2:
+            return render_template("error.html", errormsg="Salasanat eroavat toisistaan")
+        if users.create_admin(username, password1):
+            return redirect("/")
+        else:
+            return render_template("error.html", errormsg="Rekisteröinti ei onnistunut")  
+
 @app.route("/search")
 def search():
     return render_template("search.html")
@@ -108,7 +149,7 @@ def search():
 @app.route("/result", methods=["GET"])
 def result():
     query = request.args["query"]
-    sql = "SELECT I.id, I.content, U.username, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query"
+    sql = "SELECT I.id, I.content, U.username, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query AND I.user_id=U.id"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     listing = result.fetchall()
     return render_template("result.html", messages1=listing)
