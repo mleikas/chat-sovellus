@@ -15,7 +15,11 @@
 <hr>
 {% endfor %}
 {% if admin %}
-<a href="/make_area">Luo uusi Alue</a>
+<form action="/make_area" method="POST">
+<p>Tee uusi Alue</p>
+<input type="text" name="area_name" required maxlength="140">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 <hr>
 {% endif %}
 {% if session.user_id %}
