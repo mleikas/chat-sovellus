@@ -38,7 +38,6 @@ CREATE TABLE info (
 CREATE TABLE area_access (
     id SERIAL PRIMARY KEY,
     area_id INTEGER REFERENCES areas,
-    access BOOLEAN,
     visibility BOOLEAN
 );
 

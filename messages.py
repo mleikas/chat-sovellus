@@ -66,15 +66,17 @@ def delete_thread(thread_id):
     sql = "UPDATE threads SET visibility=False WHERE id=:id"
     db.session.execute(sql, {"id":thread_id})
     sql = "UPDATE info SET visibility=False WHERE thread_id=:id"
-    db.session-execute(sql, {"id":thread_id})
+    db.session.execute(sql, {"id":thread_id})
     db.session.commit()
 
-def make_area(name):
-    if name == False:
+def make_area(area_name):
+    if area_name == False:
+        return False
+    if len(area_name) > 140:
         return False
     sql = "INSERT INTO areas (area_name, visibility) VALUES (:name, TRUE);"
-    area_id = db.session.execute(sql, {"name":name}).fetchone()[0]
-    sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, True)"
+    area_id = db.session.execute(sql, {"name":area_name}).fetchone()[0]
+    sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, TRUE)"
     db.session.execute(sql, {"area_id":area_id})
     db.session.commit()
     return True

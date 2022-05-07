@@ -33,7 +33,7 @@ def make_area():
     if request.form["csrf_token"] != (session["csrf_token"]):
         abort(403)
     area_name = request.form["area_name"]
-    post_area = messages.new_area(area_name)
+    post_area = messages.make_area(area_name)
     if post_area == False:
         return render_template("error.html", errormsg="Tarkista syötteet")
     return redirect("/")
