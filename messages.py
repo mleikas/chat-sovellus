@@ -76,6 +76,8 @@ def make_area(area_name):
         return False
     sql = "INSERT INTO areas (area_name, visibility) VALUES (:name, TRUE);"
     db.session.execute(sql, {"name":area_name})
+    sql = "SELECT MAX(id) FROM areas"
+    area_id = db.session.execute(sql).fetchone()[0]
     sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, TRUE)"
     db.session.execute(sql, {"area_id":area_id})
     db.session.commit()
