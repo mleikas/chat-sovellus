@@ -44,6 +44,7 @@ Lähettäjä: {{ message.username }} <br>
 <form action="/edit_thread" method="POST">
     <input type="text" name="new_name" required maxlength="140">
     <input type="submit" value="Muokkaa ketjun nimeä">
+    <input type="hidden" name="user_id" value="{{ message.users_id }}">
     <input type="hidden" name="thread_id" value="{{ thread_id }}">
     <input type="hidden" name="area_id" value="{{ header.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">

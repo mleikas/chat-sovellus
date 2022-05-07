@@ -64,7 +64,6 @@ def delete():
     message_id = request.form["message_id"]
     user_id = int(request.form["user_id"])
     thread_id = request.form["thread_id"]
-    print(user_id)
     if session["user_id"] == user_id or users.admin():
         delete_message = messages.delete(message_id)
     if delete_message == False:
@@ -77,7 +76,7 @@ def delete_thread():
         abort(403)
     area_id = request.form["area_id"]
     thread_id = request.form["thread_id"]
-
+    user_id = int(request.form["user_id"])
     if session["user_id"] == user_id or users.admin():
         messages.delete_thread(thread_id)
     
@@ -100,6 +99,7 @@ def edit_message():
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
     message_id = request.form["message_id"]
+    user_id = int(request.form["user_id"])
     new_name = request.form["new_content"]
     if session["user_id"] == user_id or users.admin():
         messages.edit_message(message_id,new_name)
@@ -111,6 +111,7 @@ def edit_thread():
         abort(403)
     thread_id = request.form["thread_id"]
     area_id = request.form["area_id"]
+    user_id = int(request.form["user_id"])
     new_name = request.form["new_name"]
     if session["user_id"] == user_id or users.admin():
         messages.edit_thread(thread_id,new_name)
