@@ -12,7 +12,7 @@
 {% if admin %}
 <form action="/delete_area" method="POST">
 <input type="submit" value="Poista alue">
-<input type="hidden" name="area_id" value="{{ areas.id }}">
+<input type="hidden" name="area_id" value="{{ area.id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}

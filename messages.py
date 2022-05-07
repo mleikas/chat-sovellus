@@ -86,8 +86,6 @@ def make_area(area_name):
 def delete_area(area_id):
     sql = "UPDATE areas SET visibility=False WHERE id=:id"
     db.session.execute(sql, {"id":area_id})
-    sql = "SELECT MAX(id) FROM areas"
-    area_id = db.session.execute(sql).fetchone()[0]
     sql = "UPDATE threads SET visibility=False WHERE area_id=:id"
     db.session.execute(sql, {"id":area_id})
     db.session.commit()
