@@ -64,7 +64,7 @@ def delete():
     user_id = int(request.form["user_id"])
     thread_id = request.form["thread_id"]
     print(user_id)
-    if session["user_id"] == user_id:
+    if session["user_id"] == user_id or users.admin():
         delete_message = messages.delete(message_id)
     if delete_message == False:
         return render_template("error.html", errormsg="Viestin poistaminen epäonnistui")
@@ -77,7 +77,7 @@ def delete_thread():
     area_id = request.form["area_id"]
     thread_id = request.form["thread_id"]
 
-    if user.admin() == True:
+    if users.admin() == True:
         messages.delete_thread(thread_id)
     
     return redirect("/")
@@ -89,7 +89,7 @@ def delete_areas():
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
     area_id = request.form["area_id"]
-    if user.admin() == True:
+    if users.admin() == True:
         messages.delete_area(area_id)
     
     return redirect("/")
