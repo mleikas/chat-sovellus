@@ -16,9 +16,10 @@
 {% endfor %}
 {% if admin %}
 <form action="/make_area" method="POST">
-<p>Tee uusi Alue</p>
+<p>Luo uusi Alue</p>
 <input type="text" name="area_name" required maxlength="140">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+<input type="submit" value="Luo">
 </form>
 <hr>
 {% endif %}
