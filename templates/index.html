@@ -9,6 +9,10 @@
 {% for area in areas %}
 <a href="/areas/{{ area.id }}">{{ area.area_name }}</a>
 <hr>
+{% if admin %}
+<a href="/delete_area">Poista Alue</a>
+<hr>
+{% endif %}
 {% endfor %}
 {% if session.user_id %}
 Olet kirjautunut sisään.
@@ -16,7 +20,10 @@ Olet kirjautunut sisään.
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
-
+{% if admin %}
+<a href="/make_area">Uusi Alue</a>
+<hr>
+{% endif %}
 <style>
     h1 {
         background-color: skyblue
