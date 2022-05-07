@@ -62,7 +62,7 @@ def delete(message_id):
     db.session.commit()
     return result.rowcount
 
-def delete_threads(thread_id):
+def delete_thread(thread_id):
     sql = "UPDATE threads SET visibility=False WHERE id=:id"
     db.session.execute(sql, {"id":thread_id})
     sql = "UPDATE info SET visibility=False WHERE thread_id=:id"

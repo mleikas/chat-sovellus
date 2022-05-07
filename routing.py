@@ -6,7 +6,8 @@ from db import db
 @app.route("/")
 def index():
     listing = messages.get_areas()
-    return render_template("index.html",areas=listing)
+    admin = users.admin()
+    return render_template("index.html",areas=listing, admin=admin)
 
 @app.route("/send", methods=["POST"])
 def send():
