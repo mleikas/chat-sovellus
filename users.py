@@ -45,7 +45,7 @@ def create_admin(username, password):
     return login(username, password)
 
 def admin():
-    user_id = user_id()
+    user_id = session.get("user_id",0)
     sql = "SELECT id FROM users WHERE id=:user_id AND admin=TRUE"
     result = db.session.execute(sql, {"user_id": user_id})
     if result.fetchone():
