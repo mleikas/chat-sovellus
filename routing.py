@@ -84,7 +84,7 @@ def delete_thread():
     return redirect("/")
 
 @app.route("/delete_area", methods=["POST"])
-def delete_areas():
+def delete_area():
     if not users.admin():
         return render_template("error.html", errormsg="Ei oikeuksia")
     if request.form["csrf_token"] != session["csrf_token"]:
