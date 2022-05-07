@@ -78,7 +78,7 @@ def delete_thread():
     area_id = request.form["area_id"]
     thread_id = request.form["thread_id"]
 
-    if users.admin() == True:
+    if session["user_id"] == user_id or users.admin():
         messages.delete_thread(thread_id)
     
     return redirect("/")
@@ -94,6 +94,27 @@ def delete_area():
         messages.delete_area(area_id)
     
     return redirect("/")
+
+@app.route("/edit_message", methods=["POST"])
+def edit_message():
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
+    message_id = request.form["message_id"]
+    new_name = request.form["new_content"]
+    if session["user_id"] == user_id or users.admin():
+        messages.edit_message(message_id,new_name)
+    return redirect("/thread/"+str(thread_id))
+
+@app.route("/edit_thread", methods=["POST"])
+def edit_thread():
+    if request.form["csrf_token"] != session["csrf_token"]:
+        abort(403)
+    thread_id = request.form["thread_id"]
+    area_id = request.form["area_id"]
+    new_name = request.form["new_name"]
+    if session["user_id"] == user_id or users.admin():
+        messages.edit_thread(thread_id,new_name)
+    return redirect("/areas/"+str(area_id))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

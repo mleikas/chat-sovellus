@@ -90,6 +90,26 @@ def delete_area(area_id):
     db.session.execute(sql, {"id":area_id})
     db.session.commit()
 
+def edit_message(message_id, new_content):
+    if new_content == False:
+        return False
+    if len(new_content) > 140:
+        return False
+    sql = "UPDATE info SET content=:content WHERE id=:id"
+    db.session.execute(sql, {"content":new_content, "id":message_id})
+    db.session.commit
+    return True
+
+def edit_thread(thread_id, new_name):
+    if new_name == False:
+        return False
+    if len(new_name) > 140:
+        return False
+    sql = "UPDATE threads SET thread_name=:thread_name WHERE id=:id"
+    db.session.execute(sql, {"thread_name":new_name, "id":thread_id})
+    db.session.commit
+    return True
+
 def get_newest_post():
     sql = "SELECT I.id, I.time, U.username FROM info I, users U WHERE I.thread_id=:thread_id AND U.id=I.user_id ORDER BY I.id DESC LIMIT 1"
     result = db.session.execute(sql, {"thread_id":thread_id})
