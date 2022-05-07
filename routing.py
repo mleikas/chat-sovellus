@@ -70,28 +70,27 @@ def delete():
         return render_template("error.html", errormsg="Viestin poistaminen epäonnistui")
     return redirect("/thread/"+str(thread_id))
 
-@app.route("/delete_threads", methods=["POST"])
-def delete_threads():
+@app.route("/delete_thread", methods=["POST"])
+def delete_thread():
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
     area_id = request.form["area_id"]
     thread_id = request.form["thread_id"]
 
     if user.admin() == True:
-        messages.delete_threads(thread_id)
+        messages.delete_thread(thread_id)
     
     return redirect("/")
 
-@app.route("/delete_areas", methods=["POST"])
+@app.route("/delete_area", methods=["POST"])
 def delete_areas():
     if not users.admin():
         return render_template("error.html", errormsg="Ei oikeuksia")
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
     area_id = request.form["area_id"]
-
     if user.admin() == True:
-        messages.delete_threads(thread_id)
+        messages.delete_area(area_id)
     
     return redirect("/")
 

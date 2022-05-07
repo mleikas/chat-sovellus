@@ -73,20 +73,17 @@ def make_area(name):
     if name == False:
         return False
     sql = "INSERT INTO areas (area_name, visibility) VALUES (:name, TRUE);"
-    area_id = db.sessoin.execute(sql, {"name":name}).fetchone()[0]
-
+    area_id = db.session.execute(sql, {"name":name}).fetchone()[0]
     sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, True)"
     db.session.execute(sql, {"area_id":area_id})
     db.session.commit()
     return True
 
-def delete_area(area_id, thread_id):
+def delete_area(area_id):
     sql = "UPDATE areas SET visibility=False WHERE id=:id"
     db.session.execute(sql, {"id":area_id})
-    sql = "UPDATE threads SET visibility=False WHERE id=:id"
-    db.session.execute(sql, {"id":thread_id})
-    sql = "UPDATE info SET visibility=False WHERE thread=:id"
-    db.session-execute(sql, {"id":thread_id})
+    sql = "UPDATE threads SET visibility=False WHERE area_id=:id"
+    db.session.execute(sql, {"id":area_id})
     db.session.commit()
 
 def get_newest_post():
