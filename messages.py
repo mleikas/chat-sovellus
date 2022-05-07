@@ -75,7 +75,7 @@ def make_area(area_name):
     if len(area_name) > 140:
         return False
     sql = "INSERT INTO areas (area_name, visibility) VALUES (:name, TRUE);"
-    area_id = db.session.execute(sql, {"name":area_name}).fetchone()[0]
+    db.session.execute(sql, {"name":area_name})
     sql = "INSERT INTO area_access (area_id, visibility) VALUES (:area_id, TRUE)"
     db.session.execute(sql, {"area_id":area_id})
     db.session.commit()
@@ -84,6 +84,8 @@ def make_area(area_name):
 def delete_area(area_id):
     sql = "UPDATE areas SET visibility=False WHERE id=:id"
     db.session.execute(sql, {"id":area_id})
+    sql = "SELECT MAX(id) FROM areas"
+    area_id = db.session.execute(sql).fetchone()[0]
     sql = "UPDATE threads SET visibility=False WHERE area_id=:id"
     db.session.execute(sql, {"id":area_id})
     db.session.commit()
