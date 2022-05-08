@@ -30,6 +30,7 @@ Lähettäjä: {{ message.username }} <br>
     <input type="hidden" name="user_id" value="{{ message.users_id }}">
     <input type="hidden" name="thread_id" value="{{ thread_id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+{% if not message.thread_message %}
 </form> 
 <form action="/delete" method="POST">
 <input type="submit" value="Poista viesti">
@@ -38,6 +39,7 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 {% endif %}
 {% if (session.user_id == message.users_id and message.thread_message) or (admin and message.thread_message) %}
 <hr>
