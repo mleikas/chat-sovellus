@@ -12,6 +12,11 @@ def get_areas():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def get_hidden_areas():
+    sql = "SELECT id, area_name FROM areas WHERE visibility=False"
+    result = db.session.execute(sql)
+    return result.fetchall()
+
 def get_area_name(area_id):
     sql = "SELECT area_name FROM areas WHERE id=:id"
     result = db.session.execute(sql, {"id":area_id})

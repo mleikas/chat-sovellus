@@ -191,17 +191,16 @@ def access(area_id):
 def give_access():
     if not users.admin():
         return render_template("error.html", errormsg="Ei oikeuksia")
-    
+
     if request.form["csrf_token"] != (session["csrf_token"]):
         abort(403)
-    
+
     area_id = request.form["area_id"]
     username = request.form["username"]
-
     user_id = users.user_id_by_username(username)
 
     if not user_id:
         return render_template("error.html", message="Käyttäjää " + str(username) + " ei löydy")
-    
+
     users.give_access(area_id, user_id)
     return redirect("/")

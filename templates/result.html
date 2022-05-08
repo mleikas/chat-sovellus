@@ -5,7 +5,7 @@
 {% if session.user_id %}
 Olet kirjautunut sisään.
 <hr>
-<h3>Viestit, jossa hakusana: {{ query }}</h3>
+<h3>Viestit, jossa hakusana: "{{ query }}"</h3>
 <hr>
 {% for message in messages1 %}
 Lähettäjä: {{ message.username }} <br>
