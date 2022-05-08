@@ -57,6 +57,7 @@ Lähettäjä: {{ message.username }} <br>
 <input type="submit" value="Poista ketju">
 <input type="hidden" name="thread_id" value="{{ thread_id }}">
 <input type="hidden" name="area_id" value="{{ header.id }}">
+<input type="hidden" name="user_id" value="{{ message.users_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 

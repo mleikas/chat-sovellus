@@ -6,7 +6,9 @@
 <hr>
 <h2>{{ area_name }}</h2>
 {% for thread in threads %}
+<h3>
 <a href="/thread/{{ thread.id }}">{{ thread.thread_name }}</a><br>
+</h3>
 <hr>
 {% endfor %}
 {% if session.user_id %}
