@@ -40,6 +40,7 @@ Lähettäjä: {{ message.username }} <br>
 </form>
 {% endif %}
 {% if (session.user_id == message.users_id and message.thread_message) or (admin and message.thread_message) %}
+<hr>
 <form action="/edit_thread" method="POST">
     <input type="submit" value="Muokkaa ketjun nimeä">
     <input type="text" name="new_name" required maxlength="140">
@@ -54,6 +55,7 @@ Lähettäjä: {{ message.username }} <br>
 <input type="hidden" name="area_id" value="{{ header.id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+
 {% endif %}
 {% endfor %}
 <hr>

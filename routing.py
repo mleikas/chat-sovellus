@@ -22,6 +22,8 @@ def send():
 
 @app.route("/areas/<int:id>")
 def areas(id):
+    if users.holds_access(id) is None:
+        return render_template("error.html", message="Ei oikeuksia")
     name = messages.get_area_name(id)
     threads = messages.get_threads(id)
     return render_template("areas.html", threads=threads, area_name=name, area_id=id)
@@ -39,7 +41,7 @@ def make_area():
     return redirect("/")
 
 @app.route("/thread/<int:id>")
-def thread(id):
+def thread(id): 
     messages1 = messages.get_list(id)
     header = messages.get_header(id)
     admin = users.admin()
@@ -174,3 +176,34 @@ def result():
     query = request.args["query"]
     listing = messages.get_search_result(query)
     return render_template("result.html", messages1=listing)
+
+@app.route("/secret_area/<int:area_id>", methods=["GET"])
+def secret_area(area_id):
+    if not users.admin():
+        return render_template("error.html", errormsg="Ei oikeuksia")
+
+    messages.secret_area(area_id)
+    return redirect("/")    
+
+@app.route("/access/<int:area_id>")
+def access(area_id):
+    return render_template("access.html", area_id=area_id)
+
+@app.route("/give_access", methods=["POST"])
+def give_access():
+    if not users.admin():
+        return render_template("error.html", errormsg="Ei oikeuksia")
+    
+    if request.form["csrf_token"] != (session["csrf_token"]):
+        abort(403)
+    
+    area_id = request.form["area_id"]
+    username = request.form["username"]
+
+    user_id = users.user_id_by_username(username)
+
+    if not user_id:
+        return render_template("error.html", message="Käyttäjää " + str(username) + " ei löydy")
+    
+    users.give_access(area_id, user_id)
+    return redirect("/")

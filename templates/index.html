@@ -10,10 +10,10 @@
 <h3><a href="/areas/{{ area.id }}">{{ area.area_name }}</a></h3>
 {% if admin %}
 <form action="/delete_area" method="POST">
-<input type="submit" value="Poista alue">
+<input type="submit" value="Piilota alue">
 <input type="hidden" name="area_id" value="{{ area.id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
+</form>,
 {% endif %}
 <hr>
 {% endfor %}
@@ -24,6 +24,7 @@
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Luo">
 </form>
+
 <hr>
 {% endif %}
 {% if session.user_id %}

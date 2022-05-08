@@ -119,3 +119,13 @@ def get_search_result(query):
     sql = "SELECT I.id, I.content, U.username, I.thread_id, I.sent_at, U.id AS users_id FROM info I, users U WHERE I.content LIKE :query AND I.user_id=U.id"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     return result.fetchall()
+
+def get_thread_count(area_id):
+    sql = "SELECT COUNT(DISTINCT id) FROM threads WHERE area_id=:area_id"
+    result = db.session.execute(sql, {"area_id":area_id})
+    return result.fetchone()
+
+def get_post_count(thread_id):
+    sql = "SELECT COUNT(DISTINCT id) FROM info WHERE thread_id=:thread_id"
+    result = db.session.execute(sql, {"thread_id":thread_id})
+    return result.fetchone()

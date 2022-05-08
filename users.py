@@ -34,6 +34,15 @@ def logout():
     del session["csrf_token"]
     del session["user_id"]
 
+def user_id_by_username(username):
+    sql = "SELECT id from users WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()
+    if user:
+        return user.id
+    else:
+        return False
+
 def create_admin(username, password):
     hash_value = generate_password_hash(password)
     try:
@@ -47,8 +56,20 @@ def create_admin(username, password):
 def admin():
     user_id = session.get("user_id",0)
     sql = "SELECT id FROM users WHERE id=:user_id AND admin=TRUE"
-    result = db.session.execute(sql, {"user_id": user_id})
+    result = db.session.execute(sql, {"user_id":user_id})
     if result.fetchone():
         return True
     else:
         return False
+
+def give_access(area_id, user_id):
+    sql = "INSERT INTO area_access (area_id, user_id) VALUES (:topic_id, :user_id)"
+    db.session.execute(sql, {"area_id":area_id, "user_id":user_id})
+
+def holds_access(area_id):
+    user_id = session.get("user_id", 0)
+    is_admin = admin()
+    sql = "SELECT id FROM areas WHERE id=:area_id AND visibility=TRUE, OR :is_admin"
+    result = db.session.execute(sql, {"area_id":area_id, "is_admin":is_admin})
+    return result.fetchone()
+
