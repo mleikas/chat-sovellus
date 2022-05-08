@@ -22,5 +22,5 @@ Voit testata sovellusta Herokussa: chat-sovellus-ml.herokuapp.com
 
 Jatkokehitysideoita:
 - Käyttäjä näkee jokaisen alueen ketjujen ja viestien määrän ja viimeksi lähetetyn viestin ajankohdan.
-- 
+
 - Ylläpitäjä voi luoda salaisen alueen ja määrittää, keillä käyttäjillä on pääsy alueelle.
