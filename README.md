@@ -14,7 +14,7 @@ Sovelluksen ominaisuuksia:
 [x] Käyttäjä voi kirjoittaa uuden viestin olemassa olevaan ketjuun.
 
 [ ] Käyttäjä voi muokata luomansa ketjun otsikkoa sekä lähettämänsä viestin sisältöä. Käyttäjä voi myös poistaa ketjun tai viestin.
-- Tällä hetkellä poistaminen työn alla
+- Tällä hetkellä omien viestien poistaminen mahdollista
 
 [ ] Käyttäjä voi etsiä kaikki viestit, joiden osana on annettu sana.
 
