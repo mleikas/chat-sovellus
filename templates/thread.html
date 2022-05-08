@@ -41,6 +41,8 @@ Lähettäjä: {{ message.username }} <br>
 {% endif %}
 {% if (session.user_id == message.users_id and message.thread_message) or (admin and message.thread_message) %}
 <hr>
+<h3>Ketjun asetukset</h3>
+<hr>
 <form action="/edit_thread" method="POST">
     <input type="submit" value="Muokkaa ketjun nimeä">
     <input type="text" name="new_name" required maxlength="140">

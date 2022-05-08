@@ -173,7 +173,7 @@ def search():
 def result():
     query = request.args["query"]
     listing = messages.get_search_result(query)
-    return render_template("result.html", messages1=listing)
+    return render_template("result.html", messages1=listing, query=str(query))
 
 @app.route("/secret_area/<int:area_id>", methods=["GET"])
 def secret_area(area_id):
