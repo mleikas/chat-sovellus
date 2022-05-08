@@ -22,8 +22,6 @@ def send():
 
 @app.route("/areas/<int:id>")
 def areas(id):
-    if users.holds_access(id) is None:
-        return render_template("error.html", message="Ei oikeuksia")
     name = messages.get_area_name(id)
     threads = messages.get_threads(id)
     return render_template("areas.html", threads=threads, area_name=name, area_id=id)
