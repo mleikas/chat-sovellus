@@ -6,7 +6,7 @@ Sovelluksen ominaisuuksia:
 
 - Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen.
 
-- Käyttäjä näkee sovelluksen etusivulla listan alueista
+- Käyttäjä näkee sovelluksen etusivulla listan alueista.
 
 - Käyttäjä voi luoda alueelle uuden ketjun antamalla ketjun otsikon ja aloitusviestin sisällön.
 
@@ -17,6 +17,8 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi etsiä kaikki viestit, joiden osana on annettu sana.
 
 - Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
+
+- Ylläpitäjä voi poistaa/muokata muiden viestejä ja ketjuja.
 
 Voit testata sovellusta Herokussa: https://chat-sovellus-ml.herokuapp.com
 
