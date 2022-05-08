@@ -18,7 +18,7 @@ Sovelluksen ominaisuuksia:
 
 - Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
 
-Voit testata sovellusta Herokussa: chat-sovellus-ml.herokuapp.com
+Voit testata sovellusta Herokussa: https://chat-sovellus-ml.herokuapp.com
 
 Jatkokehitysideoita:
 - Käyttäjä näkee jokaisen alueen ketjujen ja viestien määrän ja viimeksi lähetetyn viestin ajankohdan.
